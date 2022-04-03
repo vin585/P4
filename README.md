@@ -7,7 +7,7 @@ instrucciones de la [Práctica 2](https://github.com/albino-pav/P2) para crear u
 los integrantes del grupo de prácticas, dar de alta al resto de integrantes como colaboradores del proyecto
 y crear la copias locales del repositorio.
 
-También debe descomprimir, en el directorio `PAV/P4`, el fichero [db_8mu.tgz](https://atenea.upc.edu/pluginfile.php/3145524/mod_assign/introattachment/0/spk_8mu.tgz?forcedownload=1)
+También debe descomprimir, en el directorio `PAV/P4`, el fichero [db_8mu.tgz](https://atenea.upc.edu/mod/resource/view.php?id=3508877?forcedownload=1)
 con la base de datos oral que se utilizará en la parte experimental de la práctica.
 
 Como entrega deberá realizar un *pull request* con el contenido de su copia del repositorio. Recuerde
