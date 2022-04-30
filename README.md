@@ -81,12 +81,12 @@ ejercicios indicados.
     
     Para LPCC:
     ```
-    fmatrix_show work/lp/BLOCK01/SES017/*.lpcc | egrep '^\[' | cut -f4,5 > lpcc_2_3.txt
+    fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc | egrep '^\[' | cut -f4,5 > lpcc_2_3.txt
     ```
     
     Para MFCC: 
      ```
-    fmatrix_show work/lp/BLOCK01/SES017/*.mfc | egrep '^\[' | cut -f4,5 > mfc_2_3.txt
+    fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc | egrep '^\[' | cut -f4,5 > mfc_2_3.txt
     ```
     
     
