@@ -36,7 +36,7 @@ ejercicios indicados.
 - Explique el procedimiento seguido para obtener un fichero de formato *fmatrix* a partir de los ficheros de
   salida de SPTK (líneas 45 a 47 del script `wav2lp.sh`).
   
-  ```
+  ```.sh
   # Our array files need a header with the number of cols and rows:
   ncol=$((lpc_order+1)) # lpc p =>  (gain a1 a2 ... ap) 
   nrow=`$X2X +fa < $base.lp | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
@@ -51,7 +51,7 @@ ejercicios indicados.
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales de predicción lineal
   (LPCC) en su fichero <code>scripts/wav2lpcc.sh</code>:
   
-  ```
+  ```.sh
   # Main command for feature extration
   sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
   $LPC -l 240 -m $lpc_order | $LPC2C -m $lpc_order -M $cepstrum_order > $base.lpcc
@@ -60,7 +60,7 @@ ejercicios indicados.
 - Escriba el *pipeline* principal usado para calcular los coeficientes cepstrales en escala Mel (MFCC) en su
   fichero <code>scripts/wav2mfcc.sh</code>:
   
-  ```
+  ```.sh
   # Main command for feature extration
   sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WINDOW -l 240 -L 240 |
   $MFCC -l 240 -m $mfcc_order -n $mfcc_order_channel > $base.mfc
@@ -71,21 +71,25 @@ ejercicios indicados.
 - Inserte una imagen mostrando la dependencia entre los coeficientes 2 y 3 de las tres parametrizaciones
   para todas las señales de un locutor.
   
+  <p align="center">
+  <img src="Captura_grafica_coeff.jpg" width="1000" title="Captura de la señal">
+  </p>
+  
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
     
     Para LP:
-    ```
+    ```.sh
     fmatrix_show work/lp/BLOCK01/SES017/*.lp | egrep '^\[' | cut -f4,5 > lp_2_3.txt
     ```
     
     Para LPCC:
-    ```
+    ```.sh
     fmatrix_show work/lpcc/BLOCK01/SES017/*.lpcc | egrep '^\[' | cut -f4,5 > lpcc_2_3.txt
     ```
     
     Para MFCC: 
-     ```
+     ```.sh
     fmatrix_show work/mfcc/BLOCK01/SES017/*.mfcc | egrep '^\[' | cut -f4,5 > mfc_2_3.txt
     ```
     
