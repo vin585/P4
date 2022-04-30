@@ -73,6 +73,23 @@ ejercicios indicados.
   
   + Indique **todas** las órdenes necesarias para obtener las gráficas a partir de las señales 
     parametrizadas.
+    
+    Para LP:
+    ```
+    fmatrix_show work/lp/BLOCK01/SES017/*.lp | egrep '^\[' | cut -f4,5 > lp_2_3.txt
+    ```
+    
+    Para LPCC:
+    ```
+    fmatrix_show work/lp/BLOCK01/SES017/*.lpcc | egrep '^\[' | cut -f4,5 > lpcc_2_3.txt
+    ```
+    
+    Para MFCC: 
+     ```
+    fmatrix_show work/lp/BLOCK01/SES017/*.mfc | egrep '^\[' | cut -f4,5 > mfc_2_3.txt
+    ```
+    
+    
   + ¿Cuál de ellas le parece que contiene más información?
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
