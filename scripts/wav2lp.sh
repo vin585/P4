@@ -4,7 +4,7 @@
 ## \TODO This file implements a very trivial feature extraction; use it as a template for other front ends.
 ## 
 ## Please, read SPTK documentation and some papers in order to implement more advanced front ends.
-
+## \DONE 
 # Base name for temporary files
 base=/tmp/$(basename $0).$$ 
 
@@ -23,7 +23,7 @@ lpc_order=$1
 inputfile=$2
 outputfile=$3
 
-UBUNTU_SPTK=1
+
 if [[ $UBUNTU_SPTK == 1 ]]; then
    # In case you install SPTK using debian package (apt-get)
    X2X="sptk x2x"
