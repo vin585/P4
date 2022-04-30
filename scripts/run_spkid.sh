@@ -16,7 +16,7 @@
 lists=lists
 w=work
 name_exp=one
-db=spk_8mu/speecon
+db= spk_8mu/speecon
 
 # ------------------------
 # Usage
