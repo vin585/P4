@@ -98,12 +98,26 @@ ejercicios indicados.
 
 - Usando el programa <code>pearson</code>, obtenga los coeficientes de correlación normalizada entre los
   parámetros 2 y 3 para un locutor, y rellene la tabla siguiente con los valores obtenidos.
+  
+  Usamos los comandos, para el locutor SES001: 
+    ```.sh
+    pearson work/lp/BLOCK00/SES001/SA001S* | less
+    ```
+    ```.sh
+    pearson work/lpcc/BLOCK00/SES001/SA001S* | less
+    ```
+    ```.sh
+    pearson work/mfcc/BLOCK00/SES001/SA001S* | less
+    ```
 
-  |                        | LP   | LPCC | MFCC |
-  |------------------------|:----:|:----:|:----:|
-  | &rho;<sub>x</sub>[2,3] |      |      |      |
+  |                        |     LP    |   LPCC   |   MFCC   |
+  |------------------------|:---------:|:--------:|:--------:|
+  | &rho;<sub>x</sub>[2,3] | -0,805909 | 0,361912 | 0.257169 |
   
   + Compare los resultados de <code>pearson</code> con los obtenidos gráficamente.
+  
+  Vemos que ....
+  
   
 - Según la teoría, ¿qué parámetros considera adecuados para el cálculo de los coeficientes LPCC y MFCC?
 
@@ -113,6 +127,15 @@ Complete el código necesario para entrenar modelos GMM.
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
+  
+  Para obtener las graficas usamos los comandos: 
+  ```.sh
+  plot_gmm_feat work/gmm/mfcc/SES001.gmm
+  ```
+ 
+  <p align="center">
+  <img src="captura_curvanivel_mfcc.jpg" width="1000" title="Captura de la señal">
+  </p>
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
