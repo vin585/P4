@@ -57,12 +57,8 @@ int main(int argc, const char *argv[]) {
 
   switch (init_method) {
   case 0:
-<<<<<<< HEAD
     gmm.random_init(data,nmix);
-=======
-    gmm.random_init(data, nmix);
     break;
->>>>>>> f00ba2d8c3edaf284282e3eec7158523847c622c
   case 1:
     break;
   case 2:
@@ -72,14 +68,8 @@ int main(int argc, const char *argv[]) {
   }
 
   /// \TODO Apply EM to estimate GMM parameters (complete the funcion in gmm.cpp)
-<<<<<<< HEAD
-  /// \DONE
-  gmm.em(data,em_iterations,em_threshold,verbose);
-
-=======
   gmm.em(data,em_iterations, em_threshold, verbose);
   /// \DONE 
->>>>>>> f00ba2d8c3edaf284282e3eec7158523847c622c
   //Create directory, if it is needed
   gmm_filename.checkDir();
   //Save gmm

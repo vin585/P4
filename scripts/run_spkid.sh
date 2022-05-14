@@ -17,10 +17,7 @@ lists=lists
 w=work
 name_exp=one
 db=spk_8mu/speecon
-<<<<<<< HEAD
-=======
 world=users 
->>>>>>> f00ba2d8c3edaf284282e3eec7158523847c622c
 
 # ------------------------
 # Usage
