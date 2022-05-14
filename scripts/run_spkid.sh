@@ -17,6 +17,10 @@ lists=lists
 w=work
 name_exp=one
 db=spk_8mu/speecon
+<<<<<<< HEAD
+=======
+world=users 
+>>>>>>> f00ba2d8c3edaf284282e3eec7158523847c622c
 
 # ------------------------
 # Usage
@@ -162,7 +166,8 @@ for cmd in $*; do
 	   # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
 	   #
 	   # - The name of the world model will be used by gmm_verify in the 'verify' command below.
-       echo "Implement the trainworld option ..."
+       gmm_train  -v 1 -T 0.001 -N5 -m 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train || exit 1
+       # \DONE
    elif [[ $cmd == verify ]]; then
        ## @file
 	   # \TODO 
@@ -172,8 +177,9 @@ for cmd in $*; do
 	   #   For instance:
 	   #   * <code> gmm_verify ... > $w/verif_${FEAT}_${name_exp}.log </code>
 	   #   * <code> gmm_verify ... | tee $w/verif_${FEAT}_${name_exp}.log </code>
-       echo "Implement the verify option ..."
-
+       gmm_verify -d work/$FEAT -e $FEAT -D work/gmm/$FEAT -E gmm -w $world lists/gmm.list lists/verif/all.test lists/verif/all.test.candidates | tee $w/verif_${FEAT}_${name_exp}.log
+       # \DONE 
+ 
    elif [[ $cmd == verifyerr ]]; then
        if [[ ! -s $w/verif_${FEAT}_${name_exp}.log ]] ; then
           echo "ERROR: $w/verif_${FEAT}_${name_exp}.log not created"
