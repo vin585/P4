@@ -2,6 +2,7 @@
 
 import struct
 
+import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
 from docopt import docopt
