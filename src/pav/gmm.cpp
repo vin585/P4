@@ -1,4 +1,4 @@
-/* Copyright (C) Universitat Politècnica de Catalunya, Barcelona, Spain.
+/* Copyright (C) Universitat Politï¿½cnica de Catalunya, Barcelona, Spain.
  *
  * Permission to copy, use, modify, sell and distribute this software
  * is granted provided this copyright notice appears in all copies.
@@ -110,9 +110,11 @@ namespace upc {
     unsigned int n;
 
     for (n=0; n<data.nrow(); ++n) {
-      /// \TODO Compute the logprob of a single frame of the input data; you can use gmm_logprob() above.
+      /// \TODO Compute the logprob of a vector frame of the input data; you can use gmm_logprob() above.
+      /// \DONE 
+      lprob+=gmm_logprob(data[n]);
     }    
-    return lprob/n;
+    return lprob/n;           
   }
 
 
@@ -203,12 +205,21 @@ namespace upc {
     fmatrix weights(data.nrow(), nmix);
     for (iteration=0; iteration<max_it; ++iteration) {
       /// \TODO
+      /// \DONE
 	  // Complete the loop in order to perform EM, and implement the stopping criterion.
 	  //
 	  // EM loop: em_expectation + em_maximization.
 	  //
       // Update old_prob, new_prob and inc_prob in order to stop the loop if logprob does not
       // increase more than inc_threshold.
+      new_prob = this->em_expectation(data, weights);
+      this->em_maximization(data, weights);
+      inc_prob = new_prob - old_prob;
+      old_prob = new_prob;
+      if (inc_prob < inc_threshold){
+        break;
+      }
+
       if (verbose & 01)
 	cout << "GMM nmix=" << nmix << "\tite=" << iteration << "\tlog(prob)=" << new_prob << "\tinc=" << inc_prob << endl;
     }
