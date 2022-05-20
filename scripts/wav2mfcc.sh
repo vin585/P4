@@ -15,7 +15,7 @@ cleanup() {
 }
 
 if [[ $# != 4 ]]; then
-   echo "$0 mfcc_order mfcc_order_channel input.wav output.mfc"
+   echo "$0 mfcc_order mfcc_order_channel input.wav output.mfcc"
    exit 1
 fi
 
@@ -45,10 +45,10 @@ sox $inputfile -t raw -e signed -b 16 - | $X2X +sf | $FRAME -l 240 -p 80 | $WIND
 
 # Our array files need a header with the number of cols and rows:
 ncol=$((mfcc_order)) # lpc p =>  (gain a1 a2 ... ap) 
-nrow=`$X2X +fa < $base.mfc | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
+nrow=`$X2X +fa < $base.mfcc | wc -l | perl -ne 'print $_/'$ncol', "\n";'`
 
 # Build fmatrix file by placing nrow and ncol in front, and the data after them
 echo $nrow $ncol | $X2X +aI > $outputfile
-cat $base.mfc >> $outputfile
+cat $base.mfcc >> $outputfile
 
 exit
