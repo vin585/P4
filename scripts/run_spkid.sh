@@ -18,7 +18,7 @@ w=work
 name_exp=one
 db_devel=spk_8mu/speecon
 db_eval=spk_8mu/sr_test
-world=users 
+world=others
 
 # ------------------------
 # Usage
@@ -90,9 +90,11 @@ fi
 # \DONE
 
 compute_lp() {
+    db=$1;
+    shift
     for filename in $(sort $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lp 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lp 20 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -102,7 +104,7 @@ compute_lpcc(){
     shift 
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lpcc 8 13 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lpcc 20 25 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -111,8 +113,8 @@ compute_mfcc(){
     shift 
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 13 24 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
-        echo $EXEC && $EXEC || exit 1
+        EXEC="wav2mfcc 20 32 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1 #20 32
     done
 }
 
@@ -145,7 +147,7 @@ for cmd in $*; do
        for dir in $db_devel/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.001 -N5 -m 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
+           gmm_train  -v 255 -T 0.001 -N 64 -m 32 -i 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then
@@ -168,7 +170,7 @@ for cmd in $*; do
 	   # Implement 'trainworld' in order to get a Universal Background Model for speaker verification
 	   #
 	   # - The name of the world model will be used by gmm_verify in the 'verify' command below.
-       gmm_train  -v 1 -T 0.001 -N5 -m 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train || exit 1
+       gmm_train  -v 255 -T 0.001 -N 64 -m 32 -i 2 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$world.gmm $lists/verif/$world.train || exit 1
        # \DONE
    elif [[ $cmd == verify ]]; then
        ## @file
@@ -194,6 +196,7 @@ for cmd in $*; do
    elif [[ $cmd == finalclass ]]; then
        ## @file
 	   # \TODO
+       # \DONE
 	   # Perform the final test on the speaker classification of the files in spk_ima/sr_test/spk_cls.
 	   # The list of users is the same as for the classification task. The list of files to be
 	   # recognized is lists/final/class.test
@@ -203,6 +206,7 @@ for cmd in $*; do
    elif [[ $cmd == finalverif ]]; then
        ## @file
 	   # \TODO
+       # \DONE
 	   # Perform the final test on the speaker verification of the files in spk_ima/sr_test/spk_ver.
 	   # The list of legitimate users is lists/final/verif.users, the list of files to be verified
 	   # is lists/final/verif.test, and the list of users claimed by the test files is
