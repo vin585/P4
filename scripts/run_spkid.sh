@@ -92,9 +92,9 @@ fi
 compute_lp() {
     db=$1;
     shift
-    for filename in $(sort $lists/class/all.train $lists/class/all.test); do
+    for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2lp 20 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        EXEC="wav2lp 21 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
@@ -113,8 +113,8 @@ compute_mfcc(){
     shift 
     for filename in $(sort $*); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
-        EXEC="wav2mfcc 20 32 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
-        echo $EXEC && $EXEC || exit 1 #20 32
+        EXEC="wav2mfcc 25 32 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1 
     done
 }
 
@@ -214,7 +214,7 @@ for cmd in $*; do
         compute_$FEAT $db_eval $lists/final/verif.test
         gmm_verify -d work/$FEAT -e $FEAT -D work/gmm/$FEAT -E gmm -w $world lists/final/verif.users lists/final/verif.test lists/final/verif.test.candidates | tee $w/verif_test.log
         perl -ane 'print "$F[0]\t$F[1]\t";
-            if ($F[2] > 1.559) {print "1\n"}
+            if ($F[2] > 0.4939) {print "1\n"}
             else {print "0\n"}' $w/verif_test.log | tee verif_test.log   
         
     # If the command is not recognize, check if it is the name
